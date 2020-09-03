@@ -522,32 +522,40 @@ public class CommandHandler {
     }
 
     private void BotVoid() {
-        while (true) {
-            if (didLogs) {
-                try (ServerSocket listener = new ServerSocket(59090)) {
-                    try (Socket socket = listener.accept()) {
-                        Scanner in = new Scanner(socket.getInputStream());
-                        String rawInputF = in.nextLine();
-                        if (in != null) {
-                            String rawInput = in.nextLine();
-                            String[] divide = rawInputF.split(" ");
+		while (true) {
+			if (didBot) {
+				try (ServerSocket listener = new ServerSocket(59090)) {
+					try (Socket socket = listener.accept()) {
+						Scanner in = new Scanner(socket.getInputStream());
+						String rawInputF = in.nextLine();
+						if (in != null) {
+							/*if (rawInputF.contains("JOINIOATTACK")) {
+								ui.join.connect("176.9.71.58", 0);
+							} else if (rawInputF.contains("JOINIOPVP")) {
+								ui.join.connect("176.9.71.58", 1000);
+							} else if (rawInputF.contains("JOINIOTD")) {
+								ui.join.connect("176.9.71.58", 2000);
+							} else if (rawInputF.contains("JOINIOSURVIVAL")) {
+								ui.join.connect("176.9.71.58", 3000);
+							} else {*/
+                            String[] divide = rawInputF.split("PZ2W");
                             String sender = divide[0];
                             String message = divide[1];
-                            FileWriter fw = new FileWriter("\\MLogs.txt", true);
+                            FileWriter fw = new FileWriter("MLogs.txt", true);
                             reply(sender + message);
                             fw.append("LOGS " + sender + ": " + message + System.getProperty("line.separator"));
                             fw.close();
                         }
-                    } catch(Throwable e) {
-                        e.printStackTrace();
-                    }
-                } catch (Throwable e) {
-                    e.printStackTrace();
-                }
-            } else {
-                break;
-            }
-        }
+					} catch(Throwable e) {
+						e.printStackTrace();
+					}
+				} catch (Throwable e) {
+					e.printStackTrace();
+				}
+			} else {
+				break;
+			}
+		}
     }
 
     private boolean didLogs = false;
